@@ -4,9 +4,6 @@ from typing import Collection
 from django.db import models
 from django.db.models import Count
 
-
-
-
 class Books(models.Model):
     goodreadsID = models.IntegerField(null=True, default=0)
     title = models.CharField(blank=True, max_length=256)
@@ -29,9 +26,6 @@ class Books(models.Model):
 
     def __str__(self):
         return f'ID:{self.id} {self.title}'
-    
-    def totalBooks(self):
-        return f'{Books.objects.filter(readStatus="read").count()}'
 
 
 

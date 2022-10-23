@@ -20,9 +20,6 @@ class DetailBooks(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = BooksSerializer
 
 
-
-
-
 # Create your views here.
 def index(request):
 
@@ -43,6 +40,11 @@ def booksdata(request):
     if request.method == 'GET':
 
         readBooks = Books.objects.filter(readStatus='read').count()
+        toRead = Books.objects.filter(readStatus='to-read').count()
+    
 
-        data =  {"readBooks" : str(readBooks)}
+        data =  {
+            'readBooks' : str(readBooks),
+            'toRead' : str(toRead),
+        }
         return Response(data)
