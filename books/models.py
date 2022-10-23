@@ -24,6 +24,7 @@ class Books(models.Model):
     bookShelves = models.CharField(blank=True, max_length=600)
     readStatus = models.CharField(blank=True, max_length=256)
     readCount = models.IntegerField(null=True, default=0)
+    price = models.DecimalField(blank=True, max_digits=5, decimal_places=2, default=0)
 
     def __str__(self):
         return f'{self.title}'
