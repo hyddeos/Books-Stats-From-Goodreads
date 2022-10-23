@@ -5,9 +5,13 @@ from .models import Books
 # Create your views here.
 def index(request):
 
-    newndata = True
+    newndata = False
     if newndata:
         Run()
 
 
-    return render(request, 'books/index.html')
+    return render(request, 'books/index.html', {
+        'books' : Books.objects.all
+    }
+
+    )
