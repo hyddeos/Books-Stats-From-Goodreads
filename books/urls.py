@@ -7,4 +7,5 @@ urlpatterns = [
     path("", views.index, name="index"),
     path('api/books/', views.ListBooks.as_view()),
     path('api/books/<int:pk>/', views.DetailBooks.as_view()),
+    path('api/booksdata/', views.booksdata),
 ]

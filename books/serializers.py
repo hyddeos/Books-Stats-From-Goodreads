@@ -7,6 +7,15 @@ class BooksSerializer(serializers.ModelSerializer):
             'id',
             'goodreadsID',
             'title',
+        )
+        model = Books
+
+class BooksSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'id',
+            'goodreadsID',
+            'title',
             'authorLF',
             'authorFL',
             'ISBN',
@@ -22,6 +31,6 @@ class BooksSerializer(serializers.ModelSerializer):
             'bookShelves',
             'readStatus',
             'readCount',
-            'price',
         )
         model = Books
+

@@ -1,0 +1,44 @@
+:root {
+    --dark: #14142b;
+    --lightdark: #232639;
+    --lightblue: #9ac1f0;
+    --lightgreen: #72fa93;
+    --green: #a0e548;
+    --orange: #e45f2b;
+    --yellow: #f6c445;
+  }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  }
+
+body{
+    background-color: var(--dark)
+}
+
+p {
+  color: white;
+}
+
+h1{
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+h2, h3, h4 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: white;
+}
+
+
+.modul {
+  background-color: var(--lightdark);
+  padding: 20px;
+  margin: 20px 30px 20px 30px;
+  max-width: 100em;
+  border-radius: 30px;
+}
+
+

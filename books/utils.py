@@ -10,9 +10,11 @@ def Run():
     file = pandas.read_csv(base)
 
 
-    # Remove =""
+    # Remove =""// etc
     file['ISBN'] = file['ISBN'].str.replace('\W', '0', regex=True)
     file['ISBN13'] = file['ISBN13'].str.replace('\W', '0', regex=True)
+    file['Date Read'] = file['Date Read'].str.replace('\W', '0', regex=True)
+    file['Date Added'] = file['Date Added'].str.replace('\W', '0', regex=True)
     file['Year Published'] = file['Year Published'].astype(str).apply(lambda x: x.replace('.0',''))
     file['Original Publication Year'] = file['Original Publication Year'].astype(str).apply(lambda x: x.replace('.0',''))
     
@@ -25,6 +27,8 @@ def Run():
     file['Read Count'] = file['Read Count'].fillna(0)
     file['Year Published'] = file['Year Published'].fillna(0)
     file['Original Publication Year'] = file['Original Publication Year'].fillna(0)
+    file['Date Read'] = file['Date Read'].fillna(0)
+    file['Date Added'] = file['Date Added'].fillna(0)
 
 
     file_array = file.to_dict(orient="records")
