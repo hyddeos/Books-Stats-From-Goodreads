@@ -1,29 +1,31 @@
 from turtle import title
 from typing import Collection
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
-class User(AbstractUser):
-    pass
+
+
 
 class Books(models.Model):
-    goodreadsID = models.BigAutoField(blank=True)
-    title = models.CharField()
-    authorLF =  models.CharField(blank=True)
-    authorFL = models.CharField(blank=True)
-    ISBN = models.BigAutoField(blank=True)
-    ISBN13 = models.BigAutoField(blank=True)
-    myRating = models.IntegerField(blank=True)
-    avgRating = models.IntegerField(blank=True)
-    publisher = models.CharField(blank=True)
-    pages = models.IntegerField(blank=True)
-    published = models.IntegerField(blank=True)
-    firstpublished = models.IntegerField(blank=True)
-    dateRead = models.CharField(blank=True)
-    dateAdded = models.CharField(blank=True)
-    readStatus = models.CharField(blank=True)
-    readCount = models.IntegerField(blank=True)
+    goodreadsID = models.CharField(blank=True, max_length=256)
+    title = models.CharField(blank=True, max_length=256)
+    authorLF =  models.CharField(blank=True, max_length=256)
+    authorFL = models.CharField(blank=True, max_length=256)
+    ISBN = models.CharField(null=True, max_length=256)
+    ISBN13 = models.CharField(blank=True, max_length=256)
+    myRating = models.CharField(blank=True, max_length=256)
+    avgRating = models.DecimalField(blank=True, max_digits=5, decimal_places=2)
+    publisher = models.CharField(blank=True, max_length=256)
+    pages = models.IntegerField(null=True)
+    published = models.CharField(blank=True, max_length=256, default=0)
+    firstpublished = models.CharField(blank=True, max_length=256, default=0)
+    dateRead = models.CharField(blank=True, max_length=256)
+    dateAdded = models.CharField(blank=True, max_length=256)
+    bookShelves = models.CharField(blank=True, max_length=600)
+    readStatus = models.CharField(blank=True, max_length=256)
+    readCount = models.IntegerField(null=True)
+
+    def __str__(self):
+        return f'{self.title}'
 
 
 
