@@ -3,8 +3,11 @@ from turtle import title
 from typing import Collection
 from django.db import models
 from django.db.models import Count
+from datetime import datetime
+
 
 class Books(models.Model):
+    updated = models.DateTimeField(datetime.now(), default=None, null=True)
     goodreadsID = models.IntegerField(null=True, default=0)
     title = models.CharField(blank=True, max_length=256)
     authorLF =  models.CharField(blank=True, max_length=256)
@@ -17,8 +20,8 @@ class Books(models.Model):
     pages = models.IntegerField(null=True, default=0)
     published = models.CharField(blank=True, max_length=256, default=0)
     firstpublished = models.CharField(blank=True, max_length=256, default=0)
-    dateRead = models.IntegerField(null=True, default=0)
-    dateAdded = models.IntegerField(null=True, default=0)
+    dateRead = models.DateField(null=True, default=0)
+    dateAdded = models.DateField(null=True, default=0)
     bookShelves = models.CharField(blank=True, max_length=600)
     readStatus = models.CharField(blank=True, max_length=256)
     readCount = models.IntegerField(null=True, default=0)

@@ -12,11 +12,11 @@
             <h2>BOOKS READ</h2>        
         </div>
         <div class="info">
-            <h1 class="green">{data.toRead}</h1>
+            <h1 class="lightblue">{data.toRead}</h1>
             <h2>BOOKS ON READ-LIST</h2>        
         </div>
         <div class="info">
-            <h1 class="green">{data.currentlyReading}</h1>
+            <h1 class="yellow">{data.currentlyReading}</h1>
             <h2>BOOKS READING NOW</h2>        
         </div>
     </div>    

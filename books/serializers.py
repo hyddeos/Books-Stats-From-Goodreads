@@ -14,6 +14,7 @@ class BooksSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
+            'updated',
             'goodreadsID',
             'title',
             'authorLF',

@@ -1,20 +1,20 @@
 import pandas
 from bookproject.settings import BASE_DIR
 from books.models import Books
+import datetime
 
 def Run():
 
-    print("Reading csv")
+    print("Reading CSV")
     base = str(BASE_DIR) + "/books/booksfile.csv"
-    print("Base", base)
     file = pandas.read_csv(base)
 
 
     # Remove =""// etc
     file['ISBN'] = file['ISBN'].str.replace('\W', '0', regex=True)
     file['ISBN13'] = file['ISBN13'].str.replace('\W', '0', regex=True)
-    file['Date Read'] = file['Date Read'].str.replace('\W', '0', regex=True)
-    file['Date Added'] = file['Date Added'].str.replace('\W', '0', regex=True)
+    file['Date Read'] = file['Date Read'].str.replace('\W', '-', regex=True)
+    file['Date Added'] = file['Date Added'].str.replace('\W', '-', regex=True)
     file['Year Published'] = file['Year Published'].astype(str).apply(lambda x: x.replace('.0',''))
     file['Original Publication Year'] = file['Original Publication Year'].astype(str).apply(lambda x: x.replace('.0',''))
     
@@ -29,14 +29,17 @@ def Run():
     file['Original Publication Year'] = file['Original Publication Year'].fillna(0)
     file['Date Read'] = file['Date Read'].fillna(0)
     file['Date Added'] = file['Date Added'].fillna(0)
+    
 
 
     file_array = file.to_dict(orient="records")
     
     print("Len", len(file_array))
     for entry in file_array:
-        try:
-            print(entry["Title"])
+        try:            
+            if not entry['Date Read']:
+                entry['Date Read'] = "1000-01-01"            
+
             book = Books(            
                 goodreadsID = entry["Book Id"],
                 title = entry["Title"],
@@ -62,3 +65,9 @@ def Run():
             pass
     print("Save done")
     return
+
+def Years():
+    print("READ---", Books.objects.filter(readStatus='read').exclude(dateRead="1000-01-01").order_by('dateRead')[:5])
+    firstyear = Books.objects.filter(readStatus='read').exclude(dateRead="1000-01-01").order_by('dateRead')[:5]
+    # FIXA -- BOOKS marked as read but without date 
+    return "hej"

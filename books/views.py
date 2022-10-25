@@ -1,7 +1,7 @@
 from urllib import request
 from xmlrpc.client import ResponseError
 from django.shortcuts import render
-from .utils import Run
+from .utils import Run, Years
 from .models import Books
 from django.db.models import Count
 
@@ -23,11 +23,10 @@ class DetailBooks(generics.RetrieveUpdateDestroyAPIView):
 # Create your views here.
 def index(request):
 
-    print("total", Books.totalBooks)
-    # Change if you want to load a new file
-    newndata = False
-    if newndata:
-        Run()
+
+    # Only loads new file if DB is empty
+    if Books.objects.filter(readStatus='read').count() == 0:
+      Run()
 
     return render(request, 'books/index.html', {
         'books' : Books.objects.all,
@@ -38,10 +37,11 @@ def index(request):
 @api_view(['GET'])
 def booksdata(request):
     if request.method == 'GET':
-
+        print("CHECK:", Books.objects.filter(readStatus='read').count())
         readBooks = Books.objects.filter(readStatus='read').count()
         toRead = Books.objects.filter(readStatus='to-read').count()
         currentlyreading = Books.objects.filter(readStatus='currently-reading').count()
+        years = Years()
     
 
         data =  {
