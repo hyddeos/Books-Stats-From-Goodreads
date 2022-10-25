@@ -41,10 +41,12 @@ def booksdata(request):
 
         readBooks = Books.objects.filter(readStatus='read').count()
         toRead = Books.objects.filter(readStatus='to-read').count()
+        currentlyreading = Books.objects.filter(readStatus='currently-reading').count()
     
 
         data =  {
             'readBooks' : str(readBooks),
             'toRead' : str(toRead),
+            'currentlyReading' : str(currentlyreading)
         }
         return Response(data)

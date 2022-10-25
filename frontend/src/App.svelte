@@ -1,27 +1,29 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import Counter from './lib/Counter.svelte'
-</script>
+  import Totalbooks from './components/Totalbooks.svelte'
+
+  const endpoint = "http://127.0.0.1:8000/api/booksdata/";
+  
+  let booksData
+	
+	fetch(endpoint)
+		.then(response => { 
+		   console.log(' response', response)
+		   console.log(' r.json() >', response.clone().json()) //
+		   response.json()
+			   .then(json => {
+						console.log('json', json)
+				    booksData = json				   
+		     })
+		     .catch(error => console.log(error))
+	}) 
+ </script>
 
 <main>
-  <div>
-    Test
-  </div>
+      {#if booksData}
+        MY BOOKS {booksData.readBooks}
+        <Totalbooks data={booksData}/>
+      {:else}
+        <p>loading</p>
+      {/if}
 </main>
 
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
