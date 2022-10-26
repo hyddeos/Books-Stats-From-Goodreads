@@ -2,7 +2,7 @@
    export let data;
 </script>
 
-{console.log("i comp", data)}
+
 
 <div class="component">
     <h3 class="headText">THE TOTAL OF BOOKS</h3>

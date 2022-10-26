@@ -1,5 +1,7 @@
 <script>
   import Totalbooks from './components/Totalbooks.svelte'
+  import Booksinyears from './components/Booksinyears.svelte';
+    import Randomtips from './components/Randomtips.svelte';
 
   const endpoint = "http://127.0.0.1:8000/api/booksdata/";
   
@@ -19,11 +21,13 @@
  </script>
 
 <main>
+      <h1>I ♥️ 📖</h1>
       {#if booksData}
-        MY BOOKS {booksData.readBooks}
-        <Totalbooks data={booksData}/>
+        <Totalbooks data={booksData} />
+        <Booksinyears data={booksData} />
+        <Randomtips data={booksData} />
       {:else}
-        <p>loading</p>
+        <p>Loading Book Collection...</p>
       {/if}
 </main>
 

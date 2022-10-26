@@ -66,8 +66,3 @@ def Run():
     print("Save done")
     return
 
-def Years():
-    print("READ---", Books.objects.filter(readStatus='read').exclude(dateRead="1000-01-01").order_by('dateRead')[:5])
-    firstyear = Books.objects.filter(readStatus='read').exclude(dateRead="1000-01-01").order_by('dateRead')[:5]
-    # FIXA -- BOOKS marked as read but without date 
-    return "hej"

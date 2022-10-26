@@ -1,7 +1,8 @@
+from turtle import update
 from urllib import request
 from xmlrpc.client import ResponseError
 from django.shortcuts import render
-from .utils import Run, Years
+from .utils import Run
 from .models import Books
 from django.db.models import Count
 
@@ -37,16 +38,29 @@ def index(request):
 @api_view(['GET'])
 def booksdata(request):
     if request.method == 'GET':
-        print("CHECK:", Books.objects.filter(readStatus='read').count())
+        # Total Books
         readBooks = Books.objects.filter(readStatus='read').count()
         toRead = Books.objects.filter(readStatus='to-read').count()
         currentlyreading = Books.objects.filter(readStatus='currently-reading').count()
-        years = Years()
-    
+        firstYear = Books.objects.filter(readStatus='read').exclude(dateRead="1000-01-01").order_by('dateRead')[:1][0].dateRead.year
+        # Books Over the Years
+
+        # Random Book Tips
+        randomTipsData = Books.objects.filter(myRating=5).exclude(ISBN13__isnull=True).order_by('?')[:1][0]
+        randomTips = {
+            "avgRating" : randomTipsData.myRating,
+            "dateRead" : randomTipsData.dateRead,
+            "ISBN13" : str(randomTipsData.ISBN13)[:-1],
+        }
+
+        print(randomTips)
+
 
         data =  {
             'readBooks' : str(readBooks),
             'toRead' : str(toRead),
-            'currentlyReading' : str(currentlyreading)
+            'currentlyReading' : str(currentlyreading),
+            'firstYear' : str(firstYear),
+            'randomTips' : dict(randomTips),
         }
         return Response(data)

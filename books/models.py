@@ -5,9 +5,14 @@ from django.db import models
 from django.db.models import Count
 from datetime import datetime
 
+class Collection(models.Model):
+    updated = models.DateTimeField(datetime.now(), default=None, null=True)
+
+    def __str__(self):
+        return f'ID:{self.id}'
+
 
 class Books(models.Model):
-    updated = models.DateTimeField(datetime.now(), default=None, null=True)
     goodreadsID = models.IntegerField(null=True, default=0)
     title = models.CharField(blank=True, max_length=256)
     authorLF =  models.CharField(blank=True, max_length=256)
