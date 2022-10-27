@@ -34,4 +34,3 @@ class BooksSerializer(serializers.ModelSerializer):
             'readCount',
         )
         model = Books
-

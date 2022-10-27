@@ -5,6 +5,8 @@ from django.shortcuts import render
 from .utils import Run
 from .models import Books
 from django.db.models import Count
+from django.db.models import F, Sum
+from django.db.models import Avg
 
 from . serializers import *
 from rest_framework import generics
@@ -38,6 +40,7 @@ def index(request):
 @api_view(['GET'])
 def booksdata(request):
     if request.method == 'GET':
+
         # Total Books
         readBooks = Books.objects.filter(readStatus='read').count()
         toRead = Books.objects.filter(readStatus='to-read').count()
@@ -48,10 +51,23 @@ def booksdata(request):
         # Random Book Tips
         randomTipsData = Books.objects.filter(myRating=5).exclude(ISBN13__isnull=True).order_by('?')[:1][0]
         randomTips = {
-            "avgRating" : randomTipsData.myRating,
+            "title" : str(randomTipsData.title),
+            "avgRating" : str(randomTipsData.avgRating),
             "dateRead" : randomTipsData.dateRead,
             "ISBN13" : str(randomTipsData.ISBN13)[:-1],
+            "author" : randomTipsData.authorLF,
         }
+
+        # Pages
+        qualifiedBooks = Books.objects.filter(readStatus='read', pages__gte=30).count()
+        avgPages = int(Books.objects.filter(readStatus='read', pages__gte=30).aggregate(Avg('pages'))['pages__avg'])
+        booksWithOutPages = (readBooks - qualifiedBooks) * avgPages
+        totalPages = Books.objects.filter(readStatus='read', pages__gte=30).aggregate(Sum('pages'))['pages__sum'] + booksWithOutPages
+        print("tot avg : 312", readBooks)
+        print("qualifiedBooks", qualifiedBooks)
+        print("avgpages", (readBooks - qualifiedBooks) * avgPages)
+        print("bwp", booksWithOutPages)
+        print("TP", totalPages)
 
         print(randomTips)
 

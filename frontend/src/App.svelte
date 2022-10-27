@@ -21,7 +21,7 @@
  </script>
 
 <main>
-      <h1>I ♥️ 📖</h1>
+      <h1>I <span style="color: red">♥️</span> Books 📖</h1>
       {#if booksData}
         <Totalbooks data={booksData} />
         <Booksinyears data={booksData} />
