@@ -1,10 +1,6 @@
 <script>
     export let data;
-    // https://openlibrary.org/api/books?bibkeys=ISBN:${data.randomTips.ISBN13}&format=json/
-    // https://openlibrary.org/api/books?bibkeys=ISBN:${data.randomTips.ISBN13}&format=json
-    // https://openlibrary.org/api/books?bibkeys=ISBN:9780980200447&jscmd=data&format=json
-    //                {console.log("test", openlibrary[`ISBN:${data.randomTips.ISBN13}`])}
-    //                {console.log("test", openlibrary[`ISBN:${data.randomTips.ISBN13}`].cover)}  
+
     const openlibraryURL = `https://openlibrary.org/api/books?bibkeys=ISBN:${data.randomTips.ISBN13}&jscmd=data&format=json`;
 
     let openlibrary
@@ -26,7 +22,8 @@
  <div class="component">
      <h3 class="headText">5-STAR BOOK TIPS</h3>
      <div class="info-container">
-        <div class="info"> 
+        <div class="info">
+
             <h1 class="green">{data.randomTips.author}</h1>
             <h2>AUTHOR</h2>
         </div>
@@ -51,13 +48,15 @@
          text-align: center;
      }
      .info-container {
-         display: flex;
-         margin: auto;
-         justify-content: center;
-         text-align: center;
+        display: table;
+        margin: auto;
+        justify-content: center;
+        text-align: center;
      }
      .info {
-        border: 1px red solid;
-         width: 33%;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        width: 33%;
      }
  </style>
