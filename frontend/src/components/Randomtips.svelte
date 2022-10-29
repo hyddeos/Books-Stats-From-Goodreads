@@ -20,12 +20,13 @@
  </script> 
  
  <div class="component">
-     <h3 class="headText">5-STAR BOOK TIPS</h3>
+     <h2 class="headText">5-STAR BOOK TIPS</h2>
+     <p class="headText">A randomly selected book from all my 5-Star rated books</p>
      <div class="info-container">
         <div class="info">
 
             <h1 class="green">{data.randomTips.author}</h1>
-            <h2>AUTHOR</h2>
+            <h2 class="grey">AUTHOR</h2>
         </div>
         <div class="info">
             {#if openlibrary}              
@@ -37,9 +38,9 @@
         </div>
          <div class="info">      
             <h1 class="lightblue">{data.randomTips.avgRating}</h1>
-            <h2>AVERAGE RATING</h2>   
+            <h2 class="grey">AVERAGE RATING</h2>   
          </div>
-     </div>    
+     </div>
  </div>
  
  

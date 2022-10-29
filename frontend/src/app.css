@@ -15,11 +15,13 @@
 
   --dark: #14142b;
   --lightdark: #232639;
+  --grey: #a9a9a9;
   --lightblue: #9ac1f0;
   --lightgreen: #72fa93;
   --green: #a0e548;
   --orange: #e45f2b;
   --yellow: #f6c445;
+
 }
 
 /* TEXT COLORS */
@@ -30,6 +32,7 @@
 .green{color: #a0e548}
 .orange{color: #e45f2b}
 .yellow{color: #f6c445}
+.grey{color: #a9a9a9}
 
 a {
   font-weight: 500;
@@ -93,6 +96,10 @@ button:focus-visible {
   width: 80em;
   min-width: 20em;
   border-radius: 30px;
+}
+
+.headerText{
+  text-align: center;
 }
 
 

@@ -35,6 +35,21 @@ class Books(models.Model):
     def __str__(self):
         return f'ID:{self.id} {self.title}'
 
+    def years():
+        # Before is everybook read before the logging started(preyears)
+        beforeYear = 2017
+        currentYear = datetime.now()
+        preYear = Books.objects.filter(readStatus='read', dateRead__range=["1000-01-01", f"{beforeYear}-12-30"] ).count()
+
+        # Loop through all years from after before year and to current year and add count to dict
+        bookYears = {
+            'preYear' : preYear,
+        }     
+        for bookYear in range(beforeYear+1, currentYear.year+1):
+            bookYears['y'+str(bookYear)] = Books.objects.filter(readStatus='read', dateRead__range=[f"{bookYear}-01-01", f"{bookYear}-12-30"] ).count()
+
+        return bookYears
+
 
 
 

@@ -21,11 +21,11 @@
  </script>
 
 <main>
-      <h1>I <span style="color: red">♥️</span> Books 📖</h1>
+      <h1 class="headerText">I <span style="color: red">♥️</span> Books 📖</h1>
       {#if booksData}
         <Totalbooks data={booksData} />
         <Booksinyears data={booksData} />
-       <!-- <Randomtips data={booksData} /> --> 
+        <Randomtips data={booksData} />
       {:else}
         <p>Loading Book Collection...</p>
       {/if}

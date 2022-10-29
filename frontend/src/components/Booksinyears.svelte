@@ -1,21 +1,27 @@
 <script>
     export let data;
-  
+
+    import Chart from 'svelte-frappe-charts';
+
+    let yearsBooks = {
+    labels : Object.keys(data.bookYears),
+    datasets: [
+        {
+        values: Object.values(data.bookYears)
+        }
+    ]
+    };
 </script>
  
-{console.log("Inc data", data)}
  <div class="component">
-     <h3 class="headText">BOOKS OVER THE YEARS</h3>
+     <h2 class="headText">BOOKS OVER THE YEARS</h2>
      <div class="info-container">
+        <div class="info-wide ">
+            <Chart data={yearsBooks} type="bar" />
+        </div>
          <div class="info">
-             <h1 class="green">Hej</h1> 
-             <h2>BEST YEAR</h2>   
-         </div>
-            <div class="info-wide ">
-
-            </div>
-         <div>
-
+             <h1 class="green">{Math.max.apply(null, Object.values(data.bookYears))}</h1> 
+             <h2 class="grey">MOST BOOKS IN A YEAR</h2>   
          </div>
      </div>    
  </div>
