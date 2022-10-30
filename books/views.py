@@ -68,6 +68,8 @@ def booksdata(request):
         bookYears = Books.years()
         # Categories
         bookCategories = Books.categories()
+        # Months
+        bookMonths = Books.months()
 
         data =  {
             'readBooks' : str(readBooks),
@@ -77,6 +79,8 @@ def booksdata(request):
             'bookYears' : dict(bookYears),
             'totalPages' : str(totalPages),
             'avgPages' : str(avgPages),
-            'longestBook' : dict(longestBook)
+            'longestBook' : dict(longestBook),
+            'categories' : dict(bookCategories),
+            'months' : dict(bookMonths)
         }
         return Response(data)

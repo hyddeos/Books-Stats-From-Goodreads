@@ -34,7 +34,8 @@
      <p class="headText">...on a singlepage A4 page that would be about</p>
      <div class="info-container">        
         <div class="info">
-            <h1 class="lightblue">{pagesHeight}<span class="grey">m</span></h1>
+            <h1 class="lightblue">
+                {pagesHeight}<span class="grey">m</span></h1>
             <h2 class="grey">HEIGHT</h2>      
         </div>
         <div class="info">

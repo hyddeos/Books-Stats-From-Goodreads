@@ -1,21 +1,26 @@
 <script>
     export let data;
+    import Chart from 'svelte-frappe-charts';
+
+
+    let categories = {
+    labels : Object.keys(data.categories),
+    datasets: [
+        {
+            values: Object.values(data.categories)
+        },
+    ],
+    };
+
+
  </script>
  
  <div class="component">
-     <h2 class="headText">THE TOTAL OF BOOKS</h2>
+     <h2 class="headText">CATEGORIES</h2>
      <div class="info-container">
          <div class="info">
-             <h1 class="green">{data.readBooks}</h1>
-             <h2 class="grey">BOOKS READ</h2>        
-         </div>
-         <div class="info">
-             <h1 class="lightblue">{data.toRead}</h1>
-             <h2 class="grey">BOOKS ON READ-LIST</h2>        
-         </div>
-         <div class="info">
-             <h1 class="yellow">{data.currentlyReading}</h1>
-             <h2 class="grey">BOOKS READING NOW</h2>        
+            <Chart data={categories} type="donut"/>
+            <p class="grey">One Book can have more then one category</p>               
          </div>
      </div>    
  </div>
@@ -33,7 +38,7 @@
          text-align: center;
      }
      .info {
-         width: 33%;
+         width: 100%;
      }
  </style>
  

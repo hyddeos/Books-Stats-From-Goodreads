@@ -3,6 +3,7 @@
   import Booksinyears from './components/Booksinyears.svelte';
   import Randomtips from './components/Randomtips.svelte';
   import Pages from './components/Pages.svelte';
+    import Categories from './components/Categories.svelte';
 
   const endpoint = "http://127.0.0.1:8000/api/booksdata/";
   
@@ -26,6 +27,7 @@
       {#if booksData}
         <Totalbooks data={booksData} />
         <Booksinyears data={booksData} />
+        <Categories data={booksData} />
         <Pages data={booksData} />
         <Randomtips data={booksData} />
       {:else}

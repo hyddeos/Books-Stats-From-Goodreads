@@ -1,3 +1,4 @@
+from calendar import month
 from email.policy import default
 from turtle import title
 from typing import Collection
@@ -50,16 +51,24 @@ class Books(models.Model):
 
         return bookYears
 
-    def categories():
-        
+    def categories():        
         categories = {
-            'Non-Fiction' : Books.objects.filter(readStatus='read', bookShelves='non-fiction').count(),
-            'Philosophy' : Books.objects.filter(readStatus='read', bookShelves='philosophy-theology').count(),
-            'Biography-Memoir' : Books.objects.filter(readStatus='read', bookShelves='biography-memoarer').count(),
-            'Fiction' : Books.objects.filter(readStatus='read', bookShelves='fiction').count(),
-            'Science-History' : Books.objects.filter(readStatus='read', bookShelves='science-history').count(),
+            #'Non-Fiction' : Books.objects.filter(readStatus='read', bookShelves__contains='non-fiction').count(),
+            'Philosophy' : Books.objects.filter(readStatus='read', bookShelves__contains='philosophy-theology').count(),
+            #'Biography-Memoir' : Books.objects.filter(readStatus='read', bookShelves__contains='biography-memoarer').count(),
+            'Fiction' : Books.objects.filter(readStatus='read', bookShelves__contains='fiction').exclude(bookShelves__contains='non-fiction').count(),
+            'Science-History' : Books.objects.filter(readStatus='read', bookShelves__contains='science-history').count(),
         }
         return categories
+
+    def months():
+        monthsCount = {
+            'Jan' : Books.objects.filter(readStatus='read', dateRead__month=1).count(),
+            'Feb' : Books.objects.filter(readStatus='read', dateRead__month=2).count()
+        }
+        
+        print(monthsCount) 
+        return monthsCount
         
 
 

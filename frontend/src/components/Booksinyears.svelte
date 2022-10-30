@@ -1,26 +1,27 @@
 <script>
     export let data;
-
     import Chart from 'svelte-frappe-charts';
-
-    console.log(Object.keys(data.bookYears))
-
+ 
     let yearsBooks = {
     labels : Object.keys(data.bookYears),
     datasets: [
-        {
-        values: Object.values(data.bookYears)
-        }
+        {   
+            name: "Some Data",
+            values: Object.values(data.bookYears)
+        },
     ],
-    colors: ['red']
+    
+    yMarkers: [{ label: "Best", value: Math.max.apply(null, Object.values(data.bookYears)),
+		options: { labelPos: 'left' }}], 
     };
+
 </script>
  
  <div class="component">
      <h2 class="headText">BOOKS OVER THE YEARS</h2>
      <div class="info-container">
         <div class="info-wide ">
-            <Chart data={yearsBooks} type="bar" />
+            <Chart data={yearsBooks} type='bar'/>
         </div>
          <div class="info">
              <h1 class="green">{Math.max.apply(null, Object.values(data.bookYears))}</h1> 
