@@ -46,11 +46,6 @@ def booksdata(request):
         readBooks = Books.objects.filter(readStatus='read').count()
         toRead = Books.objects.filter(readStatus='to-read').count()
         currentlyreading = Books.objects.filter(readStatus='currently-reading').count()
-        # Books Over the Years
-
-           
-        
-
         # Random Book Tips
         randomTipsData = Books.objects.filter(myRating=5).exclude(ISBN13__isnull=True).order_by('?')[:1][0]
         randomTips = {
@@ -65,14 +60,23 @@ def booksdata(request):
         avgPages = int(Books.objects.filter(readStatus='read', pages__gte=30).aggregate(Avg('pages'))['pages__avg'])
         booksWithOutPages = (readBooks - qualifiedBooks) * avgPages
         totalPages = Books.objects.filter(readStatus='read', pages__gte=30).aggregate(Sum('pages'))['pages__sum'] + booksWithOutPages
-        # Books in Years
+        longestBook = {
+            "title" : Books.objects.filter(readStatus='read').order_by('-pages')[:1][0].title,
+            "pages" : Books.objects.filter(readStatus='read').order_by('-pages')[:1][0].pages,
+        }
+        # Books Over the Years
         bookYears = Books.years()
+        # Categories
+        bookCategories = Books.categories()
 
         data =  {
             'readBooks' : str(readBooks),
             'toRead' : str(toRead),
             'currentlyReading' : str(currentlyreading),
             'randomTips' : dict(randomTips),
-            'bookYears' : dict(bookYears)
+            'bookYears' : dict(bookYears),
+            'totalPages' : str(totalPages),
+            'avgPages' : str(avgPages),
+            'longestBook' : dict(longestBook)
         }
         return Response(data)

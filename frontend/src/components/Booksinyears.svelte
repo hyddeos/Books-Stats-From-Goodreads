@@ -3,13 +3,16 @@
 
     import Chart from 'svelte-frappe-charts';
 
+    console.log(Object.keys(data.bookYears))
+
     let yearsBooks = {
     labels : Object.keys(data.bookYears),
     datasets: [
         {
         values: Object.values(data.bookYears)
         }
-    ]
+    ],
+    colors: ['red']
     };
 </script>
  
@@ -23,13 +26,15 @@
              <h1 class="green">{Math.max.apply(null, Object.values(data.bookYears))}</h1> 
              <h2 class="grey">MOST BOOKS IN A YEAR</h2>   
          </div>
-     </div>    
+     </div>
+     <p class="note grey">Pre-Year is the books read before the book logging at goodreads</p>    
  </div>
  
  
  <style>
      .headText {
          text-align: center;
+         text-decoration: underline lightpink;
      }
      .info-container {
          display: flex;
@@ -42,6 +47,9 @@
      }
      .info-wide{
         width: 80%;
+     }
+     .note {
+        padding-left: 40px
      }
     
  </style>

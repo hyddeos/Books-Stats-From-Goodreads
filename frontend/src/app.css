@@ -33,6 +33,7 @@
 .orange{color: #e45f2b}
 .yellow{color: #f6c445}
 .grey{color: #a9a9a9}
+.white{color:white}
 
 a {
   font-weight: 500;
@@ -91,7 +92,7 @@ button:focus-visible {
 
 .component {
   background-color: var(--lightdark);
-  margin: 1em 1em 1em 1em;
+  margin: 3em 1em 3em 1em;
   padding: 1em;
   width: 80em;
   min-width: 20em;

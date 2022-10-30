@@ -34,7 +34,7 @@
             {:else}
                 <h4>Did not find any book cover</h4>
             {/if}
-            <h2>{data.randomTips.title}</h2>     
+            <h2 class="yellow">{data.randomTips.title}</h2>     
         </div>
          <div class="info">      
             <h1 class="lightblue">{data.randomTips.avgRating}</h1>
@@ -47,6 +47,7 @@
  <style>
      .headText {
          text-align: center;
+         text-decoration: underline lightpink;
      }
      .info-container {
         display: table;

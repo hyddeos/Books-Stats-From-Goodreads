@@ -46,9 +46,26 @@ class Books(models.Model):
             'preYear' : preYear,
         }     
         for bookYear in range(beforeYear+1, currentYear.year+1):
-            bookYears['y'+str(bookYear)] = Books.objects.filter(readStatus='read', dateRead__range=[f"{bookYear}-01-01", f"{bookYear}-12-30"] ).count()
+            bookYears['Year ' + str(bookYear)] = Books.objects.filter(readStatus='read', dateRead__range=[f"{bookYear}-01-01", f"{bookYear}-12-30"] ).count()
 
         return bookYears
+
+    def categories():
+        
+        categories = {
+            'Non-Fiction' : Books.objects.filter(readStatus='read', bookShelves='non-fiction').count(),
+            'Philosophy' : Books.objects.filter(readStatus='read', bookShelves='philosophy-theology').count(),
+            'Biography-Memoir' : Books.objects.filter(readStatus='read', bookShelves='biography-memoarer').count(),
+            'Fiction' : Books.objects.filter(readStatus='read', bookShelves='fiction').count(),
+            'Science-History' : Books.objects.filter(readStatus='read', bookShelves='science-history').count(),
+        }
+        return categories
+        
+
+
+
+
+
 
 
 

@@ -24,6 +24,7 @@
 <style>
     .headText {
         text-align: center;
+        text-decoration: underline lightpink;
     }
     .info-container {
         display: flex;

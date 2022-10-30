@@ -30,8 +30,6 @@ def Run():
     file['Date Read'] = file['Date Read'].fillna(0)
     file['Date Added'] = file['Date Added'].fillna(0)
     
-
-
     file_array = file.to_dict(orient="records")
     
     print("Len", len(file_array))
