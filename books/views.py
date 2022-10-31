@@ -2,7 +2,7 @@ from turtle import update
 from urllib import request
 from xmlrpc.client import ResponseError
 from django.shortcuts import render
-from .utils import Run
+from .utils import Run, priceUpdates
 from .models import Books
 from django.db.models import Count
 from django.db.models import F, Sum
@@ -27,10 +27,12 @@ class DetailBooks(generics.RetrieveUpdateDestroyAPIView):
 # Create your views here.
 def index(request):
 
-
     # Only loads new file if DB is empty
     if Books.objects.filter(readStatus='read').count() == 0:
-      Run()
+        Run()
+
+    if Books.priceCheck() == 0:
+        priceUpdates()
 
     return render(request, 'books/index.html', {
         'books' : Books.objects.all,
@@ -81,6 +83,6 @@ def booksdata(request):
             'avgPages' : str(avgPages),
             'longestBook' : dict(longestBook),
             'categories' : dict(bookCategories),
-            'months' : dict(bookMonths)
+            'months' : list(bookMonths)
         }
         return Response(data)

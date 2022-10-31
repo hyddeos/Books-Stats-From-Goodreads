@@ -5,6 +5,7 @@ from typing import Collection
 from django.db import models
 from django.db.models import Count
 from datetime import datetime
+from django.db.models import F, Sum
 
 class Collection(models.Model):
     updated = models.DateTimeField(datetime.now(), default=None, null=True)
@@ -53,24 +54,45 @@ class Books(models.Model):
 
     def categories():        
         categories = {
-            #'Non-Fiction' : Books.objects.filter(readStatus='read', bookShelves__contains='non-fiction').count(),
+            'Non-Fiction' : Books.objects.filter(readStatus='read', bookShelves__contains='non-fiction').count(),
             'Philosophy' : Books.objects.filter(readStatus='read', bookShelves__contains='philosophy-theology').count(),
-            #'Biography-Memoir' : Books.objects.filter(readStatus='read', bookShelves__contains='biography-memoarer').count(),
+            'Biography-Memoir' : Books.objects.filter(readStatus='read', bookShelves__contains='biography-memoarer').count(),
             'Fiction' : Books.objects.filter(readStatus='read', bookShelves__contains='fiction').exclude(bookShelves__contains='non-fiction').count(),
             'Science-History' : Books.objects.filter(readStatus='read', bookShelves__contains='science-history').count(),
         }
         return categories
 
     def months():
-        monthsCount = {
-            'Jan' : Books.objects.filter(readStatus='read', dateRead__month=1).count(),
-            'Feb' : Books.objects.filter(readStatus='read', dateRead__month=2).count()
-        }
-        
-        print(monthsCount) 
-        return monthsCount
-        
 
+        startyear = 2018
+        currentYear = datetime.now()
+        monthsList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Oct', 'Nov', 'Dec']
+
+        # Get Totalt month for all years added togather
+        monthsTotalCount = {}
+        for month in range(11):
+            monthsTotalCount[monthsList[month]] = Books.objects.filter(readStatus='read', dateRead__month=month+1).count()
+
+        # Get Books per/month every year
+        booksEachMonth = {}
+        for year in range(startyear, currentYear.year+1):
+            booksEachMonth["year" + str(year)] = {}
+            for month in range(11):
+                booksEachMonth["year" + str(year)][monthsList[month]] = Books.objects.filter(readStatus='read',dateRead__year=year, dateRead__month=month+1).count()
+
+        months = [monthsTotalCount, booksEachMonth]
+
+        return months
+    
+    # Check if prices already has been added
+    def priceCheck():
+        totalPrice = Books.objects.filter(readStatus='read').aggregate(Sum('price'))['price__sum']
+        return totalPrice
+
+    # Updates the prices
+    def priceUpdates():
+        pass
+    ### Fortsätt här ### Lägg till ny model för hardcover eller endast köra billigaste, kolla på apiet:
 
 
 

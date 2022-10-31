@@ -64,3 +64,8 @@ def Run():
     print("Save done")
     return
 
+
+# Updates the prices
+def priceUpdates():
+    pass
+### Fortsätt här ### Lägg till ny model för hardcover eller endast köra billigaste, kolla på apiet:

@@ -1,16 +1,15 @@
 <script>
     export let data;
     import Chart from 'svelte-frappe-charts';
- 
+    
+    let barColors = ['#9ac1f0']
     let yearsBooks = {
     labels : Object.keys(data.bookYears),
     datasets: [
         {   
-            name: "Some Data",
             values: Object.values(data.bookYears)
         },
     ],
-    
     yMarkers: [{ label: "Best", value: Math.max.apply(null, Object.values(data.bookYears)),
 		options: { labelPos: 'left' }}], 
     };
@@ -21,7 +20,7 @@
      <h2 class="headText">BOOKS OVER THE YEARS</h2>
      <div class="info-container">
         <div class="info-wide ">
-            <Chart data={yearsBooks} type='bar'/>
+            <Chart data={yearsBooks} type='bar' title="Books read over the Years" colors={barColors} height=500/>
         </div>
          <div class="info">
              <h1 class="green">{Math.max.apply(null, Object.values(data.bookYears))}</h1> 
@@ -50,7 +49,8 @@
         width: 80%;
      }
      .note {
-        padding-left: 40px
+        text-align: center;
      }
+
     
  </style>
