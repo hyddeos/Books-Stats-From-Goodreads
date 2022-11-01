@@ -2,6 +2,10 @@ import pandas
 from bookproject.settings import BASE_DIR
 from books.models import Books
 import datetime
+from bs4 import BeautifulSoup
+import urllib.request as urllib2
+import re
+
 
 def Run():
 
@@ -66,6 +70,55 @@ def Run():
 
 
 # Updates the prices
+def searchBookPrice(searchCode):
+    opener = urllib2.build_opener()
+    opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+    response = opener.open(f'https://www.amazon.se/s?k={searchCode}')
+    html_contents = response.read()       
+    soup = BeautifulSoup(html_contents, 'html.parser')
+
+    Check = soup.find_all('span', class_='a-size-base a-color-base')
+    print("CHECK", Check)
+
+    if Check:
+        price = soup.find_all('span', class_='a-price-whole')    
+        #price = re.sub('[^0-9]', '', price)
+        #price = int(price)        
+        print("price", price)
+        return price
+    else:
+        return 0
+
 def priceUpdates():
-    pass
-### Fortsätt här ### Lägg till ny model för hardcover eller endast köra billigaste, kolla på apiet:
+    hits = 0
+    misses = 0
+
+    books = Books.objects.all()[5:6]
+    print("book",books)
+
+    for book in books:
+        if book.ISBN13 > 0:
+           print("IN ISBN13: ", book.ISBN13)
+           price = searchBookPrice(book.ISBN13)
+           print("ISBN13", book.title[:40], "PRICE", price, book.ISBN13)
+        """
+        title = re.sub('[^A-Za-z0-9]+', '', book.title)
+        print("IN ISBN", title)
+        price = searchBookPrice(title)
+        print("TITLE", book.title, "PRICE", price)        
+        if book.ISBN13 > 0:
+            print("IN ISBN13")
+            price = searchBookPrice(book.ISBN13) 
+            print("ISBN13", book.title[:40], "PRICE", price, book.ISBN13)       
+        elif len(book.ISBN) == 10 :
+            print("IN ISBN")
+            price = searchBookPrice(book.ISBN)
+            print("ISBN", book.title[:40], "PRICE", price)
+        else:
+        """          
+
+    
+
+
+
+

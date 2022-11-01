@@ -89,10 +89,6 @@ class Books(models.Model):
         totalPrice = Books.objects.filter(readStatus='read').aggregate(Sum('price'))['price__sum']
         return totalPrice
 
-    # Updates the prices
-    def priceUpdates():
-        pass
-    ### Fortsätt här ### Lägg till ny model för hardcover eller endast köra billigaste, kolla på apiet:
 
 
 
