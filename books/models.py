@@ -83,11 +83,26 @@ class Books(models.Model):
         months = [monthsTotalCount, booksEachMonth]
 
         return months
-    
-    # Check if prices already has been added
-    def priceCheck():
-        totalPrice = Books.objects.filter(readStatus='read').aggregate(Sum('price'))['price__sum']
-        return totalPrice
+
+    def prices():
+        booksWithPrice = Books.objects.filter(price__gt=0).count()
+        booksWithoutPrice = Books.objects.filter(price=0).count()
+        booksTotal = Books.objects.all().aggregate(Sum('price'))['price__sum']
+        avgPrice = booksTotal / booksWithPrice
+        booksEstimatedPrice = (booksWithoutPrice * avgPrice) + booksTotal
+
+        prices = {
+            'withPrices' : booksWithPrice,
+            'withoutPrices' : booksWithoutPrice,
+            'totalWithPrices' : booksTotal,
+            'avgPrice' : int(avgPrice),
+            'estimatedPrice' : int(booksEstimatedPrice),
+        }
+
+        return prices
+        
+
+        
 
 
 

@@ -73,9 +73,9 @@ def Run():
 def searchBookPrice(book):
     title = re.sub(r"[^a-zA-Z0-9 ]", "", book.title)
     titleSearch = title.replace(" ", "+")    
-    print("2",title)
     opener = urllib2.build_opener()
-    opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+    # If many books Amazon will block and program will stop, Then just change Version and go again
+    opener.addheaders = [('User-agent', 'Mozilla/4.8')] 
     response = opener.open(f'https://www.amazon.se/s?k={titleSearch}')
     html_contents = response.read()       
     soup = BeautifulSoup(html_contents, 'html.parser')
@@ -87,8 +87,8 @@ def searchBookPrice(book):
             price = soup.find_all('span', class_='a-price-whole')
             price = price[0].get_text()
             price = price.replace(",", "")
-            price = float(price)
             print("Price", price, "Title:", book.title)
+            price = float(price)            
             if price > 0:
                 book.price = price
                 book.save()
@@ -102,17 +102,16 @@ def priceUpdates():
     priceFound = 0
     priceNotFound = 0
 
-    books = Books.objects.all()[:3]
-    print("book",books)
+    books = Books.objects.all()
 
     for book in books:
-        tempBook = searchBookPrice(book)
-        if tempBook > 0:
-            priceFound += 1
-        else:
-            priceNotFound +=1
-
-    print("Found:", priceFound,  "Not Found:", priceNotFound)
+        if book.price == 0:
+            tempBook = searchBookPrice(book)
+            if tempBook == True and tempBook > 0:
+                priceFound += 1
+            else:
+                priceNotFound +=1
+    return None
 
 
 

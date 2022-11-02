@@ -30,15 +30,13 @@ def index(request):
     # Only loads new file if DB is empty
     if Books.objects.filter(readStatus='read').count() == 0:
         Run()
-
-    if Books.priceCheck() == 0:
-        priceUpdates()
+        # If many books see in priceUpdates function how to get around it.
+        priceUpdates()    
 
     return render(request, 'books/index.html', {
         'books' : Books.objects.all,
-    }
+    })
 
-    )
 
 @api_view(['GET'])
 def booksdata(request):
@@ -72,6 +70,8 @@ def booksdata(request):
         bookCategories = Books.categories()
         # Months
         bookMonths = Books.months()
+        # Prices
+        bookPrices = Books.prices()
 
         data =  {
             'readBooks' : str(readBooks),
