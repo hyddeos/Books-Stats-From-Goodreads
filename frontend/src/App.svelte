@@ -5,6 +5,7 @@
   import Pages from './components/Pages.svelte';
   import Categories from './components/Categories.svelte';
   import Months from './components/Months.svelte';
+  import Prices from './components/Prices.svelte';
 
   const endpoint = "http://127.0.0.1:8000/api/booksdata/";
   
@@ -31,6 +32,7 @@
         <Categories data={booksData} />
         <Pages data={booksData} />
         <Months data={booksData} />
+        <Prices data={booksData} />
         <Randomtips data={booksData} />
       {:else}
         <p>Loading Book Collection...</p>

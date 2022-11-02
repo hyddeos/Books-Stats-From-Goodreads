@@ -83,6 +83,7 @@ def booksdata(request):
             'avgPages' : str(avgPages),
             'longestBook' : dict(longestBook),
             'categories' : dict(bookCategories),
-            'months' : list(bookMonths)
+            'months' : list(bookMonths),
+            'prices' : dict(bookPrices),
         }
         return Response(data)

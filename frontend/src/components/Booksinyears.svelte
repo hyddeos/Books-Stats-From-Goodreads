@@ -50,7 +50,5 @@
      }
      .note {
         text-align: center;
-     }
-
-    
+     }   
  </style>

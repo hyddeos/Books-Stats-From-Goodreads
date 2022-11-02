@@ -22,7 +22,6 @@
 
     ],
     };
-    console.log("tesdt",data.months[1]  )
 </script>
  
  <div class="component">
