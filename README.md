@@ -2,7 +2,11 @@
 
 This is a personal project to learn more Django, to try out Svelte and of course for the love of books! 
 
-### Analyze your read books data from Goodreads.com, just export out the CSV file containing your books and place in /books folder. More data such as book covers will use the https://openlibrary.org/ API and the prices will be scrapped of amazon.com 
+### Analyze your read books data from Goodreads.com, just export out the CSV file containing your books and place in /books folder. More data such as book covers will use the https://openlibrary.org/ API and the prices will be scrapped of Amazon
+
+![books1](https://user-images.githubusercontent.com/39992041/199822529-18c0e467-5da4-44b5-b327-6d5e7a84a49c.jpg)
+![books2](https://user-images.githubusercontent.com/39992041/199822550-bec6e8b7-125b-4795-966d-7c3fd27fb55c.jpg)
+![books3](https://user-images.githubusercontent.com/39992041/199822574-87f4bbac-c3d6-4ea7-92b4-8f2bde0b9136.jpg)
 
 ## What you need:
 - Python 3
@@ -14,12 +18,19 @@ This is a personal project to learn more Django, to try out Svelte and of course
 
 Make sure to make migrations before starting.
 
+Start django server:
+``` python manage.py runserver``` 
+
+Start Svelte:
+``` npm run dev``` 
+
 # Backend
 Place the CSV-file in **/books** folder
 Change name to your filename in  ``` base = str(BASE_DIR) + "/books/booksfile.csv" ``` in the **utils.py** file in **/books/**
 When requsting the ``` http://127.0.0.1:8000/ ``` page it will start add the data to the sqlite3 db. 
 It will only run if there are no books in the database at the moment so to add new books you have to clean the db and then add the new CSV-file.
 After that it will start fetching the prices, Read about it the Price component below.
+You can view the page at ```http://localhost:5173/```
 
 # Frontend
 ## The components:
