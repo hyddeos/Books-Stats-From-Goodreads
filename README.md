@@ -62,7 +62,6 @@ See how many books you read each month every year and compare them. Also see wha
   
 I would be grateful for questions or suggestions. If you know any other similar Goodread data-analyzer please contact me. 
 
-
-Thanks for reading, 
+Feel free to use code in any way, Thanks for reading.
 
 
