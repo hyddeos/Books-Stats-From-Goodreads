@@ -132,3 +132,5 @@ dmypy.json
 # Own 
 egeninfo.txt
 *.pyc
+booksfile.csv
+.csv
