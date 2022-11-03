@@ -4,6 +4,10 @@ This is a personal project to learn more Django, to try out Svelte and of course
 
 ### Analyze your read books data from Goodreads.com, just export out the CSV file containing your books and place in /books folder. More data such as book covers will use the https://openlibrary.org/ API and the prices will be scrapped of Amazon
 
+![localhost_5173_ (2)](https://user-images.githubusercontent.com/39992041/199823307-972fb00e-ec9c-4297-a7fd-aef62e3bd3fd.png)
+
+
+
 ![books1](https://user-images.githubusercontent.com/39992041/199822529-18c0e467-5da4-44b5-b327-6d5e7a84a49c.jpg)
 ![books2](https://user-images.githubusercontent.com/39992041/199822550-bec6e8b7-125b-4795-966d-7c3fd27fb55c.jpg)
 ![books3](https://user-images.githubusercontent.com/39992041/199822574-87f4bbac-c3d6-4ea7-92b4-8f2bde0b9136.jpg)
