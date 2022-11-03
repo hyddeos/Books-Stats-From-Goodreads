@@ -15,9 +15,11 @@ This is a personal project to learn more Django, to try out Svelte and of course
 Make sure to make migrations before starting.
 
 # Backend
-Place the CSV-file in /books folder
- Change name to your filename in “”” base = str(BASE_DIR) + "/books/booksfile.csv" “”” in the utils.py file in /books
-
+Place the CSV-file in **/books** folder
+Change name to your filename in  ``` base = str(BASE_DIR) + "/books/booksfile.csv" ``` in the **utils.py** file in **/books/**
+When requsting the ``` http://127.0.0.1:8000/ ``` page it will start add the data to the sqlite3 db. 
+It will only run if there are no books in the database at the moment so to add new books you have to clean the db and then add the new CSV-file.
+After that it will start fetching the prices, Read about it the Price component below.
 
 # Frontend
 ## The components:
